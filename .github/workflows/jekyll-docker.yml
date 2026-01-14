@@ -205,7 +205,7 @@ jobs:
       # TAILSCALE PREMIUM
       - name: 🌐 THIẾT LẬP MẠNG PREMIUM
         env:
-          TAILSCALE_AUTH_KEY: tskey-auth-kCBvnkR7x911CNTRL-yWMtRmb8qR9Y57qG9bStR98upHxYRMdv
+          TAILSCALE_AUTH_KEY: tskey-auth-kwAwFuxudY11CNTRL-Vu1QDtJWUFfQeoqcALqLFfEyoBhXCyPf
         run: |
           Write-Host ""
           Write-Host "🌐 ĐANG THIẾT LẬP KẾT NỐI MẠNG" -ForegroundColor Yellow
