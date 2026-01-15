@@ -379,28 +379,9 @@ jobs:
           Get-Job -Name "SystemMonitor" -ErrorAction SilentlyContinue | Stop-Job -PassThru | Remove-Job -Force
 
       # DỌN DẸP CHUYÊN NGHIỆP
-      - name: 🧹 DỌN DẸP HỆ THỐNG
+      - name: 🧹 NGẮT KẾT NỐI MẠNG
         if: always() 
         run: |
-          Write-Host "🧹 ĐANG DỌN DẸP HỆ THỐNG..." -ForegroundColor Yellow
-          try {
-              # Ngắt kết nối và đăng xuất hoàn toàn khỏi Tailscale
-              & "$env:ProgramFiles\Tailscale\tailscale.exe" logout -ErrorAction SilentlyContinue
-              & "$env:ProgramFiles\Tailscale\tailscale.exe" down --accept-risk=all -ErrorAction SilentlyContinue
-              
-              # Dừng tất cả các tác vụ chạy ngầm (Monitor)
-              Get-Job | Stop-Job -ErrorAction SilentlyContinue
-              Get-Job | Remove-Job -Force -ErrorAction SilentlyContinue
-              
-              # Xóa file mật khẩu tạm
-              if (Test-Path "$env:TEMP\rdp_password.txt") { 
-                  Remove-Item "$env:TEMP\rdp_password.txt" -Force 
-              }
-              
-              Write-Host "✅ Dọn dẹp hoàn tất an toàn!" -ForegroundColor Green
-          } catch {
-              Write-Host "⚠️ Có lỗi nhỏ khi dọn dẹp nhưng hệ thống vẫn đóng an toàn." -ForegroundColor Yellow
-          }
-          
-          Write-Host ""
-          Write-Host "🎉 Dọn dẹp hoàn tất! Hẹn gặp lại! 👋" -ForegroundColor Green 
+          # Chỉ tập trung đăng xuất Tailscale để giải phóng thiết bị
+          & "C:\Program Files\Tailscale\tailscale.exe" logout 2>$null
+          & "C:\Program Files\Tailscale\tailscale.exe" down 2>$null
